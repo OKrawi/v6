@@ -1,0 +1,73 @@
+<div class="container-fluid" style="margin: 25px 0px">
+  <div class="row">
+    <div class="col-lg-12 col-xl-8 main">
+      <h2>{{lecture.title}}</h2>
+      <div style="width:900px;height:500px;max-width:100%;position:relative">
+        <div id='lectureIframe'
+             style="width:900px;height:500px;max-width:100%;">
+
+        </div>
+        <div class="video-cover text-center" *ngIf="toPlayCountDown || toNextLectureCountDown">
+          <strong class="countDownText">
+            <div *ngIf="toPlayCountDown">
+              Video Start in <br>
+              {{toPlayCountDown}}
+            </div>
+            <div *ngIf="toNextLectureCountDown">
+              Next Lecture in
+              {{toNextLectureCountDown}}
+            </div>
+            <button class="btn btn-primary" (click)="stopCountDown()">Stop</button>
+          </strong>
+        </div>
+      </div>
+      <div [innerHTML]="lecture.body"></div>
+      <div class="row clear-fix text-right">
+        <div class="col">
+          <div class="row">
+            <div class="col text-left" *ngIf="previous_lecture_id">
+              <button class="btn btn-primary"
+                      [routerLink]="'../' + previous_lecture_id"
+                      (click)="onToPrevious()">&laquo; Previous</button>
+            </div>
+            <div class="col" *ngIf="next_lecture_id">
+              <button class="btn btn-primary"
+                      [routerLink]="'../' + next_lecture_id"
+                      (click)="onToNext()">Next &raquo;</button>
+            </div>
+          </div>
+
+          <button class="btn btn-secondary" [routerLink]="['../../']">Back to course</button>
+
+        </div>
+      </div>
+    </div>
+
+
+    <div class="col-lg-12 col-xl-4 lecture-side-container">
+      <div class="row">
+        <div class="col-12">
+          <div class="access-taps">
+            <button class="tabbed-nav" hideWhenSmall routerLinkActive="selected" [routerLinkActiveOptions]="{exact: true}"
+               [routerLink]="['./']">
+               <span class="nav-title">Curriculum</span>&nbsp;
+               <i class="fa fa-list-alt" aria-hidden="true"></i>
+            </button>
+            <button class="tabbed-nav" hideWhenSmall routerLinkActive="selected"
+               [routerLink]="['./questions']">
+               <span class="nav-title">Questions</span>&nbsp;
+               <i class="fa fa-question" aria-hidden="true"></i>
+             </button>
+          </div>
+        </div>
+      </div>
+      <!-- <div class="row"> -->
+        <!-- <div class="col-12"> -->
+          <!-- <div class="lecture-side-navigation"> -->
+            <router-outlet></router-outlet>
+          <!-- </div> -->
+        <!-- </div> -->
+      <!-- </div> -->
+    </div>
+  </div>
+</div>

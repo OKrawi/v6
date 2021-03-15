@@ -1,0 +1,22 @@
+.question-options {
+    color: #0275d8;
+    font-size: 1.25em;
+    cursor: pointer;
+}
+
+.question-options:hover {
+    color: #025aa5;
+}
+
+.dropdown-toggle::after {
+    display: none
+}
+
+.dropdown-item {
+  cursor: pointer;
+}
+
+.container {
+  margin-top: 32px;
+  word-wrap: break-word;
+}

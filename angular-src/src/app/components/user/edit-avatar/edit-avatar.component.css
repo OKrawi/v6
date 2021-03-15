@@ -1,0 +1,66 @@
+/* .my-drop-zone {
+  border: double 6px #89D2DC;
+  border-radius: 16px;
+  padding: 30px;
+ } */
+
+/* .nv-file-over {
+  border: solid 3px #256499;
+} */
+
+.inputfile {
+	width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+}
+
+.inputfile + label {
+    display: inline-block;
+    cursor: pointer;
+}
+
+.btn-accent-1:hover {
+  color: #CD5360;
+  background-color: #fff;
+  border: 4px double #CD5360;
+}
+/* .inputfile:focus + label,
+.inputfile + label:hover { */
+    /*background-color: red;*/
+/* } */
+
+.inputfile:focus + label {
+	/* outline: 1px dotted #000; */
+	/* outline: -webkit-focus-ring-color auto 5px; */
+}
+
+.img-preview{
+  padding: 2px 100px 2px 100px;
+  background-color: #f5f5f5;
+  border: 3px double #c5c5c5;
+  max-width: 400px;
+}
+
+.img-preview-container {
+  padding: 50px;
+  border: 2px solid #f1f1f1;
+}
+
+.image-name-display {
+  background: #f2f3f5;
+  border: 1px solid #e8e9eb;
+  padding: 5px 10px;
+  height: 34px;
+  flex: 1;
+  min-width: 1px;
+  margin-right: 10px;
+}
+
+.upload-container {
+  margin-top: 32px;
+  display: flex;
+  align-items: flex-start;
+}

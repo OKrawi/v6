@@ -1,0 +1,32 @@
+<div class="list-group-item">
+
+  <h2>Change your password</h2>
+
+  <form [formGroup]="accountForm" (ngSubmit)="onSubmit()" #f="ngForm">
+      <div class="form-group">
+        <label for="newPassword">New password</label>
+        <input
+          type="text"
+          id="newPassword"
+          formControlName="newPassword"
+          class="form-control">
+      </div>
+      <div class="form-group">
+        <label for="oldPassword">Enter your old password</label>
+        <input
+          type="text"
+          id="oldPassword"
+          formControlName="oldPassword"
+          class="form-control">
+      </div>
+      <div class="form-group">
+        <label for="oldPassword2">Re-enter your old password</label>
+        <input
+          type="text"
+          id="oldPassword2"
+          formControlName="oldPassword2"
+          class="form-control">
+      </div>
+      <button class="btn btn-main" type="submit" [disabled]="!f.valid || f.value.oldPassword != f.value.oldPassword2">Submit</button>
+  </form>
+</div>

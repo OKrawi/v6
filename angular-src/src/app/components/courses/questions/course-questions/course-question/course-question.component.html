@@ -1,0 +1,100 @@
+<div *ngIf="editMode">
+  <app-question-form  [editedQuestion]="question" (editModeOver)="endEditMode()"></app-question-form>
+</div>
+
+<div *ngIf="!editMode">
+  <div class="container">
+    <div class="list-group-item">
+      <div class="dropdown">
+        <a class="dropdown-toggle pull-right" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <i class="fa fa-ellipsis-v question-options" aria-hidden="true"></i>
+        </a>
+        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+          <div *ngIf="authService.isOwner(question.user?._id); else reportButton">
+            <a class="dropdown-item" (click)="editMode = true">Edit Question</a>
+            <a class="dropdown-item" (click)="onToDelete()">Delete Question</a>
+          </div>
+          <ng-template #reportButton>
+            <a class="dropdown-item" data-toggle="modal" data-target=".bd-report-modal" (click)="OnToReport()">Report</a>
+          </ng-template>
+        </div>
+      </div>
+
+      <div class="row" style="margin-top:10px">
+        <div class="col-1">
+          <img  [src]="question.user?.avatar_path" alt="User's avatar"
+                style="border-radius: 30px">
+        </div>
+        <div class="col-10 align-self-center">
+          <h5 style="padding-left:30px">{{question.user?.username}}</h5>
+        </div>
+      </div>
+      <br/>
+      <h3>{{ question.title }}</h3>
+      <a [routerLink]="['/courses/' + question.course_title_dashed + '/lectures/' + question.lecture_id]">
+        <small *ngIf="question.lecture_id">
+          Lecture {{ coursesService.getLectureOrder(question.lecture_id) }}
+        </small>
+      </a>
+      <div [innerHTML]="question.body">
+      </div>
+      <small>
+        <i>Asked on: {{question.created_at | date: 'mediumDate' }}</i>
+        <span *ngIf="question.updated_at">&nbsp;&nbsp;|&nbsp;&nbsp;
+          <i>Last updated on: {{question.updated_at | date: 'mediumDate' }}</i>
+        </span>
+      </small>
+      <br/>
+      <br/>
+
+      <span class="useful-question" (click)="OnMarkQuestionAsUseful()">
+        <span *ngIf="!selectedAsUsefulQuestionByUser">
+          Mark as helpful
+        </span>
+        <span *ngIf="selectedAsUsefulQuestionByUser">
+          <strong>
+            Marked as helpful
+          </strong>
+        </span>
+        <strong *ngIf="question.voters_count > 0">({{ question.voters_count }})</strong>
+      </span>
+
+      <span class="useful-question" (click)="onToFollow()">
+        <span *ngIf="!following">
+          Follow Question
+        </span>
+        <strong *ngIf="following">
+          Following Question
+        </strong>
+      </span>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+
+  <div *ngFor="let response of question.responses; let i=index">
+    <app-response [response]="response" [index]="i" [question_user_id]="question.user?._id" [top_response_id]="question.top_response_id"></app-response>
+  </div>
+
+  <div class="text-center" *ngIf="moreResponsesAvailable">
+    <button class="btn btn-accent-1 more-responses-button" (click)="onLoadResponses()" [disabled]="responses_loading">More Responses</button>
+  </div>
+
+  <div class="list-group-item add-response">
+
+    <div class="form-group" *ngIf="!addingNewResponse">
+      <input type="text" class="form-control" placeholder="Add a response" (click)="addingNewResponse = true">
+    </div>
+
+    <span *ngIf="addingNewResponse">
+      <app-tinymce [(ngModel)]='newResponse'></app-tinymce>
+      <br/>
+      <button class="btn btn-primary" (click)="onToResponse()" [disabled]="newResponse.length === 0">Respond</button>
+    </span>
+
+    <div *ngIf="!editMode" class="float-right">
+      <button class="btn btn-accent-2" [routerLink]="['../']">Back</button>
+    </div>
+  </div>
+</div>

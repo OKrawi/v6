@@ -1,0 +1,23 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col">
+      <div class="text-center" *ngIf="!makeAnouncement">
+        <button class="btn btn-success btn-lg" (click)="makeAnouncement = true">Make an announcements</button>
+      </div>
+      <div *ngIf="makeAnouncement">
+        <app-announcement-form (announcementMade)="makeAnouncement = $event"></app-announcement-form>
+          <button class="btn btn-secondary" type="button" (click)="makeAnouncement = false">Cancel</button>
+      </div>
+
+      <div *ngFor="let announcement of announcements; let i = index">
+        <app-instructor-announcement [announcement]="announcement" [index]="i"></app-instructor-announcement>
+      </div>
+
+
+      <div class="text-center" *ngIf="moreAnnouncementsAvailable">
+        <button class="btn btn-success" (click)="onLoadAnnouncements()">More Announcements</button>
+      </div>
+
+    </div>
+  </div>
+</div>

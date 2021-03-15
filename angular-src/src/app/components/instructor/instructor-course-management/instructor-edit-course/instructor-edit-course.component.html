@@ -1,0 +1,56 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12">
+      <form (ngSubmit)="onSubmit()" #f="ngForm">
+        <div class="form-group">
+          <label for="title">Course Title</label>
+          <input type="text" class="form-control" name="title"
+                 required [(ngModel)]="course.title">
+        </div>
+        <div class="form-group">
+          <label for="img_path">Image Path</label>
+          <input type="text" class="form-control"
+                 name="img_path" [(ngModel)]="course.img_path">
+        </div>
+        <div class="row">
+          <div class="col-md-6 col-xs-12">
+            <label for="category">Category</label>
+            <select name="category" class="form-control" [(ngModel)]='course.category_title_dashed'>
+              <option value="master-web-development-basics">Web Basics</option>
+              <option value="master-front-end-libraries">Front-End Libraries</option>
+              <option value="master-front-end-frameworks">Front-End Frameworks</option>
+              <option value="master-back-end-development">Back-End Development</option>
+            </select>
+          </div>
+          <div class="col-md-6 col-xs-12">
+            <label for="level">Level</label>
+            <input type="number" class="form-control"
+                   name='level' [(ngModel)]="course.level"
+                   min='1' max='10' step='1'>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="subtitle">Subtitle</label>
+          <input type="text" class="form-control"
+                 name="subtitle" [(ngModel)]="course.subtitle">
+        </div>
+        <div class="form-group">
+          <label for="description">Description</label>
+          <app-tinymce [(ngModel)]="course.description" name="description"></app-tinymce>
+        </div>
+
+        <div class="form-group">
+          <label for="isPreview">
+            <input type="checkbox"
+                   name="isPublished" [(ngModel)]="course.isPublished">
+            Publish course
+          </label>
+        </div>
+
+
+        <button class="btn btn-primary" type="submit"
+                [disabled]="f.pristine || !f.valid">Save</button>
+      </form>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,22 @@
+.container {
+  margin-top: 32px;
+}
+
+.crop {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.announcement {
+  margin-bottom: 20px;
+  -webkit-box-shadow: 1px 1px 4px -1px rgba(34,34,34,0.5);
+     -moz-box-shadow: 1px 1px 4px -1px rgba(34,34,34,0.5);
+          box-shadow: 1px 1px 4px -1px rgba(34,34,34,0.5);
+}
+
+.announcement:hover {
+  -webkit-box-shadow: 3px 3px 8px -1px rgba(34,34,34,0.5), -3px 3px 8px -1px rgba(34,34,34,0.5);
+     -moz-box-shadow: 3px 3px 8px -1px rgba(34,34,34,0.5), -3px 3px 8px -1px rgba(34,34,34,0.5);
+          box-shadow: 3px 3px 8px -1px rgba(34,34,34,0.5), -3px 3px 8px -1px rgba(34,34,34,0.5);
+}

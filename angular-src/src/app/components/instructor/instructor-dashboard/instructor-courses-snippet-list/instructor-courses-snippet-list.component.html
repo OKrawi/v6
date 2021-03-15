@@ -1,0 +1,15 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12">
+      <div class="list-group">
+        <div *ngFor="let course of courses">
+          <a [routerLink]="'courses/'+[course.title_dashed]" class="list-group-item list-group-item-action flex-column align-items-start">
+            <div class="d-flex w-100 justify-content-start">
+              <h5 class="mb-1">{{ course.title }}</h5>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

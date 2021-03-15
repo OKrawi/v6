@@ -1,0 +1,56 @@
+<div class="row">
+  <div class="col-12">
+    <form [formGroup]="courseGoalsForm" (ngSubmit)="onSubmit()">
+      <div class="row">
+
+        <div class="col-12" formArrayName="prerequisites">
+          <div class="row" *ngFor="let prerequisiteCtrl of courseGoalsForm.get('prerequisites')?.controls; let i = index"
+               [formGroupName]="i" style="margin-top: 10px;">
+            <div class="col-10">
+              <select class="form-control" formControlName="course_title_dashed">
+                <option *ngFor='let course of courses'
+                        [value]="course.title_dashed">{{ course.title }}</option>
+              </select>
+            </div>
+            <div class="col-2">
+              <button type="button" class="btn btn-danger" (click)="onDeletePrerequisites(i)">X</button>
+            </div>
+          </div>
+          <hr>
+          <div class="row">
+            <div class="col-12">
+              <button type="button" class="btn btn-success" (click)="onAddPrerequisites()">Add Prerequisites</button>
+            </div>
+          </div>
+          <hr>
+        </div>
+
+        <div class="col-12" formArrayName="goals">
+          <div class="row" *ngFor="let prerequisiteCtrl of courseGoalsForm.get('goals')?.controls; let i = index"
+               [formGroupName]="i" style="margin-top: 10px;">
+            <div class="col-10">
+              <input type="text" class="form-control" formControlName="course_goal">
+            </div>
+            <div class="col-2">
+              <button type="button" class="btn btn-danger" (click)="onDeleteGoals(i)">X</button>
+            </div>
+          </div>
+          <hr>
+          <div class="row">
+            <div class="col-12">
+              <button type="button" class="btn btn-success" (click)="onAddGoals()">Add Goal</button>
+            </div>
+          </div>
+          <hr>
+        </div>
+
+        <div class="row">
+          <div class="col-12">
+            <button type="submit" class="btn btn-success"
+                    [disabled]="(courseGoalsForm.pristine && !formChanged ) || !courseGoalsForm.valid">Save</button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

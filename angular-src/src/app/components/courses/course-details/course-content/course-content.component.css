@@ -1,0 +1,57 @@
+.container {
+  margin-top: 32px;
+  margin-bottom: 32px;
+}
+
+.currentLecture {
+  background: #256499;
+  color: #fff;
+}
+
+.chapter {
+  border: 1px solid #c5c5c5;
+  margin-top: 20px;
+  -webkit-box-shadow: 1px 1px 4px -1px rgba(34,34,34,0.5);
+     -moz-box-shadow: 1px 1px 4px -1px rgba(34,34,34,0.5);
+          box-shadow: 1px 1px 4px -1px rgba(34,34,34,0.5);
+}
+
+.chapter:hover {
+  -webkit-box-shadow: 3px 3px 8px -1px rgba(34,34,34,0.5), -3px 3px 8px -1px rgba(34,34,34,0.5);
+     -moz-box-shadow: 3px 3px 8px -1px rgba(34,34,34,0.5), -3px 3px 8px -1px rgba(34,34,34,0.5);
+          box-shadow: 3px 3px 8px -1px rgba(34,34,34,0.5), -3px 3px 8px -1px rgba(34,34,34,0.5);
+}
+
+.card {
+  border: none;
+}
+
+.card-header {
+  background-color: #fff;
+}
+
+.lectures {
+  margin-left: -1px;
+  margin-right: -1px;
+  margin-bottom: -1px;
+}
+
+.lecture {
+  margin: 0;
+  padding: 8px 32px;
+  cursor: pointer;
+  border-bottom: 1px solid #cdcdcd;
+}
+
+.lecture:hover {
+  background: #89D2DC;
+  color: #fff;
+}
+
+.lecture.currentLecture:hover {
+  background: #19466b;
+}
+
+label {
+  margin-bottom: 0;
+}

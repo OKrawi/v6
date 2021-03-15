@@ -1,0 +1,17 @@
+<div class="container">
+
+  <div class="row">
+    <div class="col-12">
+      <form (ngSubmit)="onSubmit()" #f="ngForm">
+        <div class="form-group text-center">
+          <label for="title">Course Title</label>
+          <input type="text" class="form-control" ngModel
+                 name="title" required [(ngModel)]="course_title">
+        </div>
+        <button class="btn btn-primary" type="submit"
+                [disabled]="!f.valid">Create</button>
+      </form>
+    </div>
+  </div>
+<button class="btn btn-warning" (click)="onCancel()">Cancel</button>
+</div>

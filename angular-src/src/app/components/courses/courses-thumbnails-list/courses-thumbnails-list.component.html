@@ -1,0 +1,15 @@
+<div class="container-fluid" *ngIf="courses">
+  <div class="row justify-content-center">
+    <ng-container *ngFor="let course of courses">
+      <div class="col col-sm-6 col-md-4">
+        <div class="card mx-auto">
+          <img class="card-img-top img-fluid" src="{{ course.img_path }}" alt="{{ course.title }}">
+          <div class="card-body text-center">
+            <p class="card-title"><strong>{{ course.title }}</strong></p>
+            <button (click)="onViewCourseDetails(course.title_dashed)" class="btn btn-accent-1">Start Learning</button>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+</div>

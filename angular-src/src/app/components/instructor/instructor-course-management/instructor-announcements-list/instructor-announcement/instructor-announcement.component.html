@@ -1,0 +1,15 @@
+<div *ngIf="!editAnnouncement">
+
+  <div class="pull-right">
+    <i class="fa fa-pencil" aria-hidden="true" (click)="editAnnouncement = true"></i>
+    <i class="fa fa-trash" aria-hidden="true" (click)="onDeleteAnnouncements()"></i>
+  </div>
+
+  <img [src]="announcement.user?.avatar_path" alt="Instructor's avatar">
+  <h2>{{announcement.title}}</h2>
+  <div [innerHTML]="announcement.body"></div>
+</div>
+<div *ngIf="editAnnouncement">
+  <app-announcement-form (announcementMade)="editAnnouncement = $event" [announcement]="announcement" [index]="index"></app-announcement-form>
+  <button class="btn btn-secondary btn-sm" type="button" (click)="editAnnouncement = false">Cancel</button>
+</div>

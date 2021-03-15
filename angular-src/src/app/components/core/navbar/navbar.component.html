@@ -1,0 +1,57 @@
+<nav class="navbar navbar-expand-md navbar-light bg-light" id="mainNav">
+
+  <a class="navbar-brand mb-0 h1 color-accent-1" [routerLink]="['/']"><strong>OSSAMA KRAWI</strong></a>
+
+  <button class="navbar-toggler "
+  type="button" data-toggle="collapse" data-target="#MainNavBar"
+  aria-controls="MainNavBar" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+
+  <div class="collapse navbar-collapse " id="MainNavBar">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle color-main" href="#" id="dropdownCategories" role="button"
+           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <strong>Categories</strong>
+        </a>
+        <div class="dropdown-menu" aria-labelledby="dropdownCategories">
+          <a class="dropdown-item color-main" [routerLink]="['/categories/master-web-development-basics']">Web Basics</a>
+          <a class="dropdown-item color-main" [routerLink]="['/categories/master-front-end-libraries']">Front-End Libraries</a>
+          <a class="dropdown-item color-main" [routerLink]="['/categories/master-front-end-frameworks']">Front-End Frameworks</a>
+          <a class="dropdown-item color-main" [routerLink]="['/categories/master-back-end-development']">Back-End Development</a>
+        </div>
+      </li>
+      <li class="nav-item" [routerLinkActive]="['active']" [routerLinkActiveOptions] = "{exact:true}">
+        <a class="nav-link color-main" [routerLink]="['/courses']"><strong>Courses</strong></a>
+      </li>
+    </ul>
+    <ul class="navbar-nav">
+
+      <li class="nav-item " *ngIf="authService.loggedIn()" [routerLinkActive]="['active']" [routerLinkActiveOptions] = "{exact:true}">
+        <a class="nav-link color-main" [routerLink]="['/user']"><strong>My profile</strong></a>
+      </li>
+      <li class="nav-item" *ngIf="authService.is_admin()" [routerLinkActive]="['active']" >
+        <a class="nav-link color-main" [routerLink]="['/admin']"><strong>Admin</strong></a>
+      </li>
+      <li class="nav-item" *ngIf="authService.is_instructor()" [routerLinkActive]="['active']" >
+        <a class="nav-link color-main" [routerLink]="['/instructor']"><strong>Instructor</strong></a>
+      </li>
+
+      <li class="nav-item" *ngIf="!authService.loggedIn()" [routerLinkActive]="['active']" [routerLinkActiveOptions] = "{exact:true}">
+        <a class="nav-link color-main" [routerLink]="['/login']"><strong>Login</strong></a>
+      </li>
+      <li class="nav-item" *ngIf="!authService.loggedIn()" [routerLinkActive]="['active']" [routerLinkActiveOptions] = "{exact:true}">
+        <a class="nav-link color-main" [routerLink]="['/register']"><strong>Register</strong></a>
+      </li>
+      <li class="nav-item" *ngIf="authService.loggedIn()">
+        <a class="nav-link color-main" (click)="onLogoutClick()" style="cursor: pointer;">Logout</a>
+      </li>
+      </ul>
+    <!-- <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form> -->
+  </div>
+</nav>

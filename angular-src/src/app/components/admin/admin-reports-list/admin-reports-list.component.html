@@ -1,0 +1,69 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12">
+      <div class="form-group">
+        <label for="exampleSelect1">Example select</label>
+        <select class="form-control" (change)="selectAbuseType($event.target.value)">
+          <option value="">Any abuse type</option>
+          <option value="isCopyrightOrTrademarkViolation">Copyright Or Trademark Violation</option>
+          <option value="isInapropriateCourseContent">Inapropriate Course Content</option>
+          <option value="isInapropriateBehavior">Inapropriate Behavior</option>
+          <option value="isPolicyViolation">Policy Violation</option>
+          <option value="isOther">Other</option>
+        </select>
+      </div>
+    </div>
+    <div class="col-12">
+      <div class="form-check">
+        <label class="form-check-label">
+          <input type="checkbox" class="form-check-input"
+                 [checked]="resolved" (click)="onCheckSeeResolvedOnly()">
+            See Resolved Reports only
+        </label>
+      </div>
+    </div>
+    <div class="col-12">
+      <div class="form-check">
+        <label class="form-check-label">
+          <input type="checkbox" class="form-check-input"
+                 [checked]="not_resolved" (click)="onCheckSeeNotResolvedOnly()">
+            See Non Resolved Reports only
+        </label>
+      </div>
+    </div>
+    <div class="col-12">
+      <div class="form-check">
+        <label class="form-check-label">
+          <input type="checkbox" class="form-check-input"
+                 [checked]="is_removed" (click)="onCheckSeeRemovedOnly()">
+            See Removed Reports only
+        </label>
+      </div>
+    </div>
+    <div class="col-12">
+      <div class="form-check">
+        <label class="form-check-label">
+          <input type="checkbox" class="form-check-input"
+                 [checked]="suspect_banned" (click)="onCheckSeeBannedOnly()">
+            See Banned Reports only
+        </label>
+      </div>
+    </div>
+    <div class="col-12 ">
+      <div class="form-check">
+        <label class="form-check-label">
+          <input type="checkbox" class="form-check-input"
+                 [checked]="is_ignored" (click)="onCheckSeeIgnoredOnly()">
+            See Ignored Reports only
+        </label>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <div *ngFor="let report of reports; let i = index">
+        <app-admin-report [report]="report" [index]="i"></app-admin-report>
+      </div>
+    </div>
+  </div>
+</div>

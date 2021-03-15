@@ -1,0 +1,66 @@
+<div class="course-oveview container">
+
+  <h3>
+    About this course
+  </h3>
+  <br/>
+
+  <div [innerHTML]="course.description"></div>
+  <br/>
+
+  <hr>
+
+  <div *ngIf="course.goals && course.goals.length > 0">
+    <br/>
+    <h5>When you finish this course you will be able to </h5>
+    <br/>
+    <ul class="goals">
+      <div *ngFor="let goal of course.goals">
+        <li>{{ goal }}</li>
+      </div>
+    </ul>
+    <br/>
+    <hr>
+  </div>
+  <br/>
+
+  <div *ngIf="course.prerequisite_courses != null; else noPrerequisites">
+    <h5>This course relies on information provided in previous courses </h5>
+    <br/>
+    <ul>
+      <div *ngFor="let prerequisite of course.prerequisite_courses">
+      <li>
+        <a [routerLink]="'../../' + prerequisite.title_dashed">{{ prerequisite.title }}</a>
+      </li>
+    </div>
+    </ul>
+  </div>
+  <ng-template #noPrerequisites>
+    <h4>
+      This course does not have prerequisites
+    </h4>
+  </ng-template>
+  <br/>
+
+  <hr>
+  <br/>
+
+  <br/>
+  <div *ngFor="let instructor of course.instructors">
+    <div class="row">
+      <div class="col-2">
+        <h5>Instructors</h5>
+      </div>
+      <div class="col-2">
+        <img [src]="instructor?.avatar_path" alt="Instructor's image" class="avatar d-block mx-auto">
+      </div>
+      <div class="col-8">
+        <h5>{{ instructor?.username }}</h5>
+        <h6>{{ instructor?.title }}</h6>
+        <hr>
+        <div [innerHTML]="instructor.biography"></div>
+      </div>
+    </div>
+  </div>
+  <br/>
+</div>

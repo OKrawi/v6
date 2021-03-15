@@ -1,0 +1,31 @@
+<div class="container">
+  <div *ngIf='announcements.length > 0; else noAnnouncements'>
+    <div *ngFor="let announcement of announcements; let i = index">
+      <div class="list-group-item announcement">
+        <div class="row">
+          <div class="col-1">
+            <img  [src]="announcement.user?.avatar_path" alt="Instructor's avatar"
+                  style="border-radius: 30px">
+          </div>
+          <div class="col-10 align-self-center">
+            <h5 style="padding-left:30px">{{announcement.user?.username}}</h5>
+          </div>
+        </div>
+        <br/>
+        <h3 class="crop">{{ announcement.title }}</h3>
+        <p class="crop">{{ announcement.body | removeHTML }}</p>
+        <i>On {{announcement.created_at | date: 'mediumDate' }}</i>
+        <br/>
+        <br/>
+        <a [routerLink]="announcement._id" (click)="setIndex(i)">Learn more</a>
+      </div>
+    </div>
+    <div class="text-center" *ngIf="announcementService.moreAnnouncementsAvailable">
+      <button class="btn btn-accent-1" (click)="onLoadAnnouncements()" [disabled]="announcementService.loading">More Announcements</button>
+    </div>
+    <ng-template #noAnnouncements>
+      <br/>
+      <p class="text-center">This course doesn't have any announcements yet.</p>
+    </ng-template>
+  </div>
+</div>

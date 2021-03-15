@@ -1,0 +1,9 @@
+.active {
+  color: #fff;
+  background-color: #256499;
+}
+
+.list-group-item-action:hover:not(.active) {
+  color: #fff;
+  background-color: #89D2DC;
+}

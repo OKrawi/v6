@@ -1,0 +1,103 @@
+<div class="list-group-item clearfix">
+  <div class="pull-left">
+
+
+    <div [ngSwitch]="report.abuseType">
+      <h4 *ngSwitchCase="'isCopyrightOrTrademarkViolation'">Copyright Or Trademark Violation</h4>
+      <h4 *ngSwitchCase="'isInapropriateCourseContent'">Inapropriate Course Content</h4>
+      <h4 *ngSwitchCase="'isInapropriateBehavior'">Inapropriate Behavior</h4>
+      <h4 *ngSwitchCase="'isPolicyViolation'">Policy Violation</h4>
+      <h4 *ngSwitchDefault>Other</h4>
+    </div>
+
+
+    <h4>{{report.item_title}}</h4>
+    <p>{{report.item_body}}</p>
+
+    <div *ngIf="report.question_id && !report.response_id">
+      <div *ngIf="!report.is_removed">
+        <p class="list-group-item-text">Go to
+          <a [routerLink]="'../../courses/' + report.course_title_dashed + '/questions/' + report.question_id">Question</a></p>
+      </div>
+
+      <div *ngIf="!report.is_ignored">
+        <button class="btn btn-secondary btn-sm"
+                *ngIf="!report.is_removed"
+                (click)="OnDeleteQuestion(report.question_id, report.suspect?._id)">Delete question</button>
+        <button class="btn btn-secondary btn-sm"
+                *ngIf="!report.suspect_banned"
+                (click)="OnBanByQuestion(report.question_id, report.suspect?._id, report.is_removed)">Ban user</button>
+      </div>
+    </div>
+
+    <div *ngIf="report.response_id">
+      <div *ngIf="!report.is_removed">
+        <p class="list-group-item-text">Go to
+          <a [routerLink]="'../../courses/' + report.course_title_dashed + '/questions/' + report.question_id">Response</a></p>
+      </div>
+
+      <div *ngIf="!report.is_ignored">
+        <button class="btn btn-secondary btn-sm"
+                *ngIf="!report.is_removed"
+                (click)="OnDeleteResponse(report.response_id, report.suspect?._id)">Delete response</button>
+        <button class="btn btn-secondary btn-sm"
+                *ngIf="!report.suspect_banned"
+                (click)="OnBanByResponse(report.response_id, report.suspect?._id, report.is_removed)">Ban user</button>
+      </div>
+    </div>
+
+    <div *ngIf="report.announcement_id && !report.comment_id">
+      <div *ngIf="!report.is_removed">
+        <p class="list-group-item-text">Go to
+          <a [routerLink]="'../../courses/' + report.course_title_dashed + '/announcements/' + report.announcement_id">Announcement</a></p>
+      </div>
+
+      <div *ngIf="!report.is_ignored">
+        <button class="btn btn-secondary btn-sm"
+                *ngIf="!report.is_removed"
+                (click)="OnDeleteAnnouncement(report.announcement_id, report.suspect?._id)">Delete announcement</button>
+        <button class="btn btn-secondary btn-sm"
+                *ngIf="!report.suspect_banned"
+                (click)="OnBanByAnnouncement(report.announcement_id, report.suspect?._id, report.is_removed)">Ban user</button>
+      </div>
+    </div>
+
+    <div *ngIf="report.comment_id">
+      <div *ngIf="!report.is_removed">
+        <p class="list-group-item-text">Go to
+          <a [routerLink]="'../../courses/' + report.course_title_dashed + '/announcements/' + report.announcement_id">comment</a></p>
+      </div>
+
+      <div *ngIf="!report.is_ignored">
+        <button class="btn btn-secondary btn-sm"
+        *ngIf="!report.is_removed"
+        (click)="OnDeleteComment(report.comment_id, report.suspect?._id)">Delete comment</button>
+        <button class="btn btn-secondary btn-sm"
+        *ngIf="!report.suspect_banned"
+        (click)="OnBanByComment(report.comment_id, report.suspect?._id, report.is_removed)">Ban user</button>
+      </div>
+    </div>
+
+    <button class="btn btn-secondary btn-sm"
+            *ngIf="!report.resolved"
+            (click)="OnIgnoreReport(report._id)">Ignore</button>
+    <img [src]="report.suspect?.avatar_path" alt="suspect's avatar">
+    <p class="list-group-item-text">{{ report.body }}</p>
+    <p>{{ report.created_at | date:'medium' }}</p>
+    <div *ngIf="report.resolved">
+      <p>
+        <em>Resolved</em>
+        <strong *ngIf="report.is_removed">Deleted</strong>
+        <strong *ngIf="report.suspect_banned">Banned</strong>
+        <strong *ngIf="report.is_ignored">Ignored</strong>
+      </p>
+    </div>
+
+
+
+
+
+
+
+  </div>
+</div>

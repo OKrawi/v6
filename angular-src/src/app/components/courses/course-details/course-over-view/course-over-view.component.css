@@ -1,0 +1,19 @@
+.course-oveview {
+  background-color: #fff;
+  margin-top: 32px;
+  margin-bottom: 32px;
+  padding: 32px;
+  border: 1px solid #c5c5c5;
+  -webkit-box-shadow: 1px 1px 5px 0px rgba(119,119,119,1);
+     -moz-box-shadow: 1px 1px 5px 0px rgba(119,119,119,1);
+          box-shadow: 1px 1px 5px 0px rgba(119,119,119,1);
+}
+
+.goals {
+  list-style-type: none;
+  padding-left: 22px;
+}
+
+.goals li:before {
+  content:"\2714\0020";
+}

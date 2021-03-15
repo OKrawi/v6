@@ -1,0 +1,75 @@
+<div class="container course-questions-list">
+  <div class="list-group-item controls">
+
+    <div class="temp">
+      <div class="form-group search-quaestions-bar">
+        <input type="text" class="form-control" [(ngModel)]="search"
+               (keyup)="onSearch()" placeholder="Search questions here...">
+      </div>
+      <button class="btn btn-accent-1 new-questions-button" [routerLink]="['./new']"
+              (click)="resetQuestionsIfSearching()">New Question</button>
+    </div>
+
+    <div class="row">
+      <div class="col-12 col-sm-12 col-md-12 col-lg-4">
+        <div class="form-check">
+          <label class="form-check-label">
+            <input type="checkbox" class="checkbox" [checked]="sort_by_popularity" (click)="onCheckSortByPopularity()">
+            <span>Sort by popularity</span>
+          </label>
+        </div>
+      </div>
+      <div class="col-12 col-sm-6 col-md-6 col-lg-4">
+        <div class="form-check">
+          <label class="form-check-label">
+            <input type="checkbox" class="checkbox" [checked]="see_following" (click)="onSeeFollowing()">
+            <span>See questions I am following</span>
+          </label>
+        </div>
+      </div>
+      <div class="col-12 col-sm-6 col-md-6 col-lg-4">
+        <div class="form-check">
+          <label class="form-check-label">
+            <input type="checkbox" class="checkbox" [checked]="no_responses" (click)="onCheckNoResponses()">
+            <span>See questions without answers</span>
+          </label>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="questions-cards">
+    <div *ngFor="let question of questions; let i = index">
+      <a style="cursor: pointer" [routerLink]="[question._id]" (click)="setIndex(i)"
+         class="list-group-item clearfix">
+         <div class="container">
+
+           <div class="row align-items-center h-100">
+             <div class="col-1">
+              <img [src]="question.user?.avatar_path" alt="user's avatar"
+                   style="border-radius: 30px; margin-left: -20px">
+             </div>
+             <div class="col-8">
+               <h4 class="list-group-item-heading crop">{{ question.title }}</h4>
+               <p class="list-group-item-text crop">{{ question.body | removeHTML }}</p>
+             </div>
+             <div class="col-3">
+               <div class="text-center">
+                 <p>{{ question.responses_count }}</p>
+                 <p>Responses</p>
+               </div>
+             </div>
+           </div>
+         </div>
+      </a>
+    </div>
+  </div>
+
+  <div *ngIf="questions.length === 0">
+    <p>There are no questions yet! Be the first to ask.</p>
+  </div>
+
+  <div class="text-center" *ngIf="moreQuestionsAvailable">
+    <button class="btn btn-accent-1" (click)="onLoadQuestions()" [disabled]="loading" [ngClass]="{'d-none': loading}">More Questions</button>
+  </div>
+</div>

@@ -1,0 +1,43 @@
+<!-- <loading-spinner *ngIf="questionsService.loading" [loading]="questionsService.loading"></loading-spinner> -->
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col" style="padding:0px">
+        <div class="form-group">
+          <input type="text" class="form-control" [(ngModel)]="search" style="border-top-left-radius: 0px; border-top-right-radius: 0px"
+                 (keyup)="onSearch()" placeholder="Search questions here...">
+        </div>
+    </div>
+  </div>
+</div>
+
+<div class="text-center">
+  <button class="btn btn-boston-blue" [routerLink]="['./new']"
+          (click)="resetQuestionsIfSearching()" style="margin:10px">New Question</button>
+</div>
+
+<div *ngFor="let question of questions; let i = index">
+  <a style="cursor: pointer;" [routerLink]="[question._id]" (click)="setIndex(i)"
+     class="list-group-item clearfix">
+     <div class="container">
+       <div class="row align-items-center h-100">
+         <div class="col-1">
+          <img [src]="question.user?.avatar_path" alt="user's avatar"
+               style="border-radius: 30px; margin-left: -25px">
+         </div>
+         <div class="col-10">
+           <h4 class="list-group-item-heading crop">{{ question.title }}</h4>
+           <p class="list-group-item-text crop">{{ question.body | removeHTML }}</p>
+         </div>
+       </div>
+     </div>
+  </a>
+</div>
+
+<div *ngIf="questions.length === 0">
+  <p>There are no questions yet! Be the first to ask.</p>
+</div>
+
+<div class="text-center" *ngIf="moreQuestionsAvailable">
+  <button class="btn btn-boston-blue" (click)="onLoadQuestions()" [disabled]="loading">More Questions</button>
+</div>

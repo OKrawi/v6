@@ -1,0 +1,115 @@
+<div class="course-details">
+  <div class="row align-items-center w-100">
+    <div class="col col-md-7 course-title-col">
+      <h4 class="display-3"><strong>{{ course.title }}</strong></h4>
+      <h6>{{course.subtitle}}</h6>
+      <br/>
+      <button class="btn btn-accent-1" (click)="onEnroll()">Enroll for Free</button>
+    </div>
+    <div class="col-md-5" id="img-col">
+      <div class="course-image-container">
+        <img class="mx-auto my-auto d-block" src="{{ course.img_path  }}"
+             alt="{{ course.title }} course image"
+             style="max-width: 50%">
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="list-group-item">
+    <div class="row">
+      <div class="col">
+
+        <h3>When you finish this course you will be able to: </h3>
+        <div *ngFor="let goal of course.goals">
+          <h4>{{ goal }}</h4>
+        </div>
+
+        <div *ngIf="course.prerequisite_courses" >
+          <h4>Prerequisites</h4>
+          <p>Please make sure to finish these courses before enrolling in this course: </p>
+          <div *ngFor="let prerequisite of course.prerequisite_courses">
+            <a [routerLink]="'../../' + prerequisite.title_dashed">{{ prerequisite.title }}</a>
+          </div>
+        </div>
+
+        <div id="accordion" role="tablist" aria-multiselectable="true">
+          <div *ngFor="let chapter of course.chapters; let i = index">
+            <div class="card">
+              <div class="card-header" role="tab" id="headingTwo" data-toggle="collapse"
+              attr.href="#tablist_{{chapter._id}}" attr.aria-controls="tablist_{{i}}" style="cursor: pointer">
+              <h5 class="mb-0">
+                <a href="#" aria-expanded="false">
+                  {{chapter.title}}
+                </a>
+              </h5>
+            </div>
+            <div id="tablist_{{chapter._id}}" class="collapse" role="tabpanel" aria-labelledby="headingTwo">
+              <div class="card-block">
+                <div *ngFor="let lecture of chapter.lectures; let i2 = index">
+                  <div *ngIf="lecture.isPreview; else notPreview">
+                    <div data-toggle="modal" data-target=".bd-preview-modal" (click)="setPreviewLecture(i, i2)">
+                      <div class="row">
+                        <div class="col-6">
+                          <span class="preview-link">
+                            {{ lecture.title }}
+                          </span>
+                        </div>
+                        <div class="col-3">
+                          {{ lecture.videoDuration }}
+                        </div>
+                        <div class="col-3">
+                          <p class="pull-right">
+                            Preview
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <ng-template #notPreview>
+                    <div class="row">
+                      <div class="col-6">
+                        <p>
+                          {{ lecture.title }}
+                        </p>
+                      </div>
+                      <div class="col-3">
+                        {{ lecture.videoDuration }}
+                      </div>
+                    </div>
+                  </ng-template>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <h4>Instructor details: </h4>
+      <div *ngFor="let instructor of course.instructors">
+        <p>{{ instructor?.username }}</p>
+        <img [src]="instructor?.img_path" alt="Instructor's image">
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade bd-preview-modal" tabindex="-1" role="dialog"
+     aria-labelledby="previewModal" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">{{ lecture_title }}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div id='previewIframe'
+             style="width:900px;height:500px;max-width:100%;"></div>
+      </div>
+    </div>
+  </div>
+</div>

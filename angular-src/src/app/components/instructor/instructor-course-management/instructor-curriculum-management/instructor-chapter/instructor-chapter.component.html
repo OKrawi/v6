@@ -1,0 +1,66 @@
+<!-- <div class="container">
+  <div class="row">
+    <div class="col"> -->
+
+    <div *ngIf="!editingChapterActive">
+      <div class="pull-right">
+        <i class="fa fa-pencil" aria-hidden="true" (click)="onToEditChapter()"></i>
+        <i class="fa fa-trash" aria-hidden="true" (click)="onDeleteChapter()"></i>
+        <i class="fa fa-bars handle" aria-hidden="true" style="min-height:30px;min-width:30px"></i>
+      </div>
+      <h3><span *ngIf="!chapter.isPublished">Unpublished Chapter: </span>{{ chapter.title }}</h3>
+    </div>
+
+      <ng-container *ngIf="editingChapterActive">
+
+        <form [formGroup]="chapterForm" (ngSubmit)="onEditChapter()">
+          <div class="form-group">
+            <label for="chapter_title">Chapter Title</label>
+            <input type="text" id="chapter_title"
+                   formControlName="chapter_title" class="form-control">
+          </div>
+          <div class="form-group">
+            <label for="isPublished">
+              <input type="checkbox"
+                     id="isPublished" formControlName="isPublished">
+              Publish Chapter
+            </label>
+          </div>
+          <button type="submit" class="btn btn-lg btn-success"
+                  [disabled]="!chapterForm.valid || chapterForm.pristine">Edit</button>
+          <button class="btn btn-lg btn-warning" type="button"
+                  (click)="onCancelEditChapter()">Cancel</button>
+        </form>
+      </ng-container>
+    <!-- </div> -->
+  <!-- </div> -->
+  <br>
+
+  <div class="drag-wrapper">
+    <div class="drag-container" [dragula]='"chapter-bag"' [attr.data-bag]='chapter._id' [attr.data-chapterindex]='chapter_index'>
+      <div *ngFor="let lecture of lectures; let i = index">
+        <app-instructor-lecture
+          [lecture]="lecture" [index]="i" [chapter_index]="chapter_index"></app-instructor-lecture>
+      </div>
+    </div>
+  </div>
+
+  <!-- <div class="row"> -->
+    <!-- <div class="col"> -->
+      <button class="btn btn-sm btn-info" (click)="onAddLecture()" *ngIf="!addingLectureActive">Add Lecture</button>
+      <ng-container *ngIf="addingLectureActive">
+        <form [formGroup]="lectureForm" (ngSubmit)="onCreateLecture()">
+          <div class="form-group">
+            <label for="lecture_title">Lecture Title</label>
+            <input type="text" id="lecture_title"
+                   formControlName="lecture_title" class="form-control">
+          </div>
+          <button type="submit" class="btn btn-sm btn-success"
+                  [disabled]="!lectureForm.valid || lectureForm.pristine">Create</button>
+          <button class="btn btn-sm btn-warning" type="button"
+                  (click)="onCancelAddLecture()">Cancel</button>
+        </form>
+      </ng-container>
+    <!-- </div>
+  </div>
+</div> -->

@@ -1,0 +1,73 @@
+<div class="course-details">
+  <div class="row align-items-center w-100">
+    <div class="col-md-5" id="img-col">
+      <div class="course-image-container">
+        <img class="mx-auto my-auto d-block" src="{{ course.img_path  }}"
+             alt="{{ course.title }} course image"
+             style="max-width: 50%">
+      </div>
+    </div>
+    <div class="col col-md-7 course-title-col">
+      <h4 class="display-3"><strong>{{ course.title }}</strong></h4>
+      <br/>
+      <button class="btn btn-accent-1" (click)="markAsWatched()"
+              *ngIf="(user_course_data.last_lecture_id ) || course.published_lectures_count > 0"
+              [routerLink]="user_course_data.last_lecture_id ? ('./lectures/' + user_course_data.last_lecture_id) : ('./lectures/' + coursesService.course.chapters[0].lectures[0]._id)">
+        Continue to lecture  {{ lectureOrder }}
+      </button>
+      <br/>
+      <br/>
+      <br/>
+      <div *ngIf="user_course_data.watched_lectures_ids">
+        <div *ngIf="user_course_data.watched_lectures_ids.length === course.published_lectures_count">
+          <i class="fa fa-trophy fa-2x" aria-hidden="true"></i>
+        </div>
+        <p>Finished <strong>{{ user_course_data.watched_lectures_ids.length }}</strong> out of <strong>{{ course.published_lectures_count }}</strong> lectures</p>
+        <div class="progress">
+          <div class="progress-bar progress-bar-striped bg-danger" role="progressbar"
+               [ngStyle]="{'width': (user_course_data.watched_lectures_ids.length*100/course.published_lectures_count)+'%'}"
+               [attr.aria-valuenow]="user_course_data.watched_lectures_ids.length" aria-valuemin="0"
+               [attr.aria-valuemax]="course.published_lectures_count">
+          </div>
+        </div>
+      </div>
+      <br/>
+      <br/>
+    </div>
+  </div>
+</div>
+
+<nav class="navbar navbar-expand-md navbar-light bg-custom">
+  <button class="navbar-toggler "type="button" data-toggle="collapse" data-target="#CourseNavBar"
+          aria-controls="CourseNavBar" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse " id="CourseNavBar">
+    <ul class="navbar-nav w-100">
+      <div class="row w-100 nav-row">
+        <div class="col-12 col-md-3">
+          <li class="nav-item" [routerLinkActive]="['active']" [routerLinkActiveOptions] = "{exact:true}">
+            <a class="nav-link color-main" [routerLink]="['./overview']"><strong>Overview</strong></a>
+          </li>
+        </div>
+        <div class="col-12 col-md-3">
+          <li class="nav-item" [routerLinkActive]="['active']" [routerLinkActiveOptions] = "{exact:true}">
+            <a class="nav-link color-main" [routerLink]="['./content']"><strong>Course Content</strong></a>
+          </li>
+        </div>
+        <div class="col-12 col-md-3">
+          <li class="nav-item" [routerLinkActive]="['active']" [routerLinkActiveOptions] = "{exact:true}">
+            <a class="nav-link color-main" [routerLink]="['./questions']"><strong>Questions</strong></a>
+          </li>
+        </div>
+        <div class="col-12 col-md-3">
+          <li class="nav-item" [routerLinkActive]="['active']" [routerLinkActiveOptions] = "{exact:true}">
+            <a class="nav-link color-main" [routerLink]="['./announcements']"><strong>Announcements</strong></a>
+          </li>
+        </div>
+      </div>
+    </ul>
+  </div>
+</nav>
+<router-outlet></router-outlet>

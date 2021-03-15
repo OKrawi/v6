@@ -1,0 +1,45 @@
+<div class="container">
+  <div class="list-group-item">
+    <div class="dropdown">
+      <a class="dropdown-toggle pull-right" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <i class="fa fa-ellipsis-v question-options" aria-hidden="true"></i>
+      </a>
+      <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" data-toggle="modal" data-target=".bd-report-modal" (click)="OnToReport()">Report</a>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-2 col-md-1">
+        <img  [src]="announcement.user?.avatar_path" alt="Instructor's avatar"
+              style="border-radius: 30px">
+      </div>
+      <div class="col-10 align-self-center">
+        <h5 style="padding-left:30px">{{announcement.user?.username}}</h5>
+      </div>
+    </div>
+    <br/>
+    <h2>{{announcement.title}}</h2>
+    <div [innerHTML]="announcement.body"></div>
+    <i>On {{announcement.created_at | date: 'mediumDate' }}</i>
+    <br/>
+
+    <div *ngFor="let comment of announcement.comments; let i=index">
+      <br/>
+      <app-courses-comment [comment]="comment" [index]="i"></app-courses-comment>
+    </div>
+    <br/>
+    <form (ngSubmit)="onToComment()">
+      <div class="form-group">
+        <input type="text" class="form-control" [(ngModel)]="newComment" name="comment"
+        placeholder="Add a comment">
+      </div>
+      <button class="btn btn-main" type="submit">Comment</button>
+      <button class="btn btn-accent-2 float-right" type="button" [routerLink]="'../'">Back</button>
+    </form>
+
+
+    <div class="text-center" *ngIf="moreCommentsAvailable">
+      <button class="btn btn-accent-1" (click)="onLoadComments()">More Comments</button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,29 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <div class="drag-wrapper" style="width:inherit">
+        <div class="drag-container" [dragula]='"curriculum-bag"' [dragulaOptions]="options" data-bag="curriculum-bag">
+          <div *ngFor="let chapter of chapters; let i = index">
+            <app-instructor-chapter [chapter]="chapter" [chapter_index]="i"
+                                    [lectures]="lectures[i]"></app-instructor-chapter>
+          </div>
+        </div>
+      </div>
+
+      <button class="btn btn-lg btn-info" (click)="onAddChapter()" *ngIf="!addingChapterActive">Add Chapter</button>
+      <ng-container *ngIf="addingChapterActive">
+        <form [formGroup]="chapterForm" (ngSubmit)="onCreateChapter()">
+          <div class="form-group">
+            <label for="chapter_title">Chapter Title</label>
+            <input type="text" id="chapter_title"
+                   formControlName="chapter_title" class="form-control">
+          </div>
+          <button type="submit" class="btn btn-lg btn-success"
+                  [disabled]="!chapterForm.valid || chapterForm.pristine">Create</button>
+          <button class="btn btn-lg btn-warning" type="button"
+                  (click)="onCancelAddChapter()">Cancel</button>
+        </form>
+      </ng-container>
+    </div>
+  </div>
+</div>

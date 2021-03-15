@@ -1,0 +1,19 @@
+.card {
+  padding: 20px;
+  margin: 25px;
+  max-width: 300px;
+  border: 1px solid #c5c5c5;
+  -webkit-box-shadow: 1px 1px 4px -1px rgba(34,34,34,0.5);
+     -moz-box-shadow: 1px 1px 4px -1px rgba(34,34,34,0.5);
+          box-shadow: 1px 1px 4px -1px rgba(34,34,34,0.5);
+}
+
+.card:hover {
+  -webkit-box-shadow: 3px 3px 8px -1px rgba(34,34,34,0.5), -3px 3px 8px -1px rgba(34,34,34,0.5);
+     -moz-box-shadow: 3px 3px 8px -1px rgba(34,34,34,0.5), -3px 3px 8px -1px rgba(34,34,34,0.5);
+          box-shadow: 3px 3px 8px -1px rgba(34,34,34,0.5), -3px 3px 8px -1px rgba(34,34,34,0.5);
+}
+
+.card-title {
+  font-size: 1.3rem;
+}

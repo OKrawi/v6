@@ -1,0 +1,10 @@
+<div class="list-group-item">
+  <div class="form-group">
+    <label for="username">Edit your username</label>
+    <input type="text" id="username" class="form-control" [(ngModel)]="username" maxlength="20">
+  </div>
+
+  <!-- TODO : Show message that says max username is 20 char long -->
+
+  <button class="btn btn-main" (click)="onToEditProfile()">Edit</button>
+</div>

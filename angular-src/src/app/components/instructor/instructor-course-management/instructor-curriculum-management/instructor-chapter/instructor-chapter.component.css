@@ -1,0 +1,9 @@
+ span.handle {
+  cursor: move;
+  cursor: grab;
+  cursor: -moz-grab;
+  cursor: -webkit-grab;
+}
+.drag-container {
+  min-height: 10px;
+}

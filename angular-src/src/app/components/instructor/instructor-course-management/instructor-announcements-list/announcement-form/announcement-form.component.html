@@ -1,0 +1,13 @@
+<form [formGroup]="announcementForm" (ngSubmit)="onSubmit()">
+  <div class="form-group">
+    <label for="title">Title</label>
+    <input type="text" id="title" formControlName="title" class="form-control">
+  </div>
+  <div class="form-group">
+    <label for="body">Announcement</label>
+    <app-tinymce formControlName="body"></app-tinymce>
+    <!-- <textarea id="body" rows="6" formControlName="body" class="form-control"></textarea> -->
+  </div>
+  <button class="btn btn-primary" type="submit"
+          [disabled]="!announcementForm.valid" >Submit</button>
+</form>

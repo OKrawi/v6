@@ -1,0 +1,44 @@
+.response {
+  position: relative;
+  display: block;
+  margin-bottom: -1px;
+  background-color: #fff;
+  border: 1px solid rgba(0,0,0,.125);
+  margin-bottom: 0;
+  border-radius: 0.25rem;
+}
+
+.response_padding {
+  padding: .75rem 1.25rem;
+}
+
+.question-options {
+    color: #0275d8;
+    font-size: 1.25em;
+    cursor: pointer;
+}
+
+.question-options:hover {
+    color: #025aa5;
+}
+
+.dropdown-toggle::after {
+    display: none
+}
+
+.dropdown-item {
+  cursor: pointer;
+}
+
+.useful-response{
+  cursor: pointer;
+  color: #328CC1;
+}
+
+.fa-trophy{
+  color: #D9B310;
+}
+
+.top_response{
+  background: #F3E8B7;
+}

@@ -1,0 +1,27 @@
+/* .preview-link{
+  color: #0275d8;
+  touch-action: manipulation;
+  background-color: transparent;
+  cursor: pointer;
+}
+.preview-link:hover{
+  text-decoration: underline;
+} */
+
+.container {
+  margin-top: 32px;
+}
+
+.course-details {
+  background-color: #333745;
+  color: #fff;
+}
+
+.course-image-container {
+  padding: 32px;
+  max-width: 600px;
+}
+
+.course-title-col {
+  padding: 32px 50px;
+}

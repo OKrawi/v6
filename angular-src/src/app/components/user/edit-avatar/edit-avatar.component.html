@@ -1,0 +1,49 @@
+<div class="list-group-item text-center">
+  <!-- <div class="preview-container"> -->
+
+  <h4>Photo</h4>
+  <h6>Add a nice photo for your profile</h6>
+  <br/>
+  <!-- <div ng2FileDrop
+       [ngClass]="{'nv-file-over': hasBaseDropZoneOver}"
+       (fileOver)="fileOverBase($event)"
+       [uploader]="uploader"
+       class="well my-drop-zone text-center">
+      Drop Image Here
+  </div> -->
+  <div class="img-preview-container">
+    <img *ngIf="!uploader.queue[0]?._file" src="{{img_path}}" alt="preview" class="img-preview">
+    <img *ngIf="uploader.queue[0]?._file" src="" imgPreview [image]="uploader.queue[0]?._file" class="img-preview img-fluid" />
+    <br/>
+    <small>Accepted file formats are "png", "jpg" and "jpeg"</small>
+    <br/>
+    <small>Maximum image size is 2MB</small>
+  </div>
+  <div class="upload-container">
+    <small class="image-name-display">{{ uploader.queue[0]?.file?.name || "Image path"}}</small>
+    <input type="file" name="file" id="file" ng2FileSelect [uploader]="uploader" class="inputfile" />
+    <label for="file" class="btn btn-accent-1 btn-sm">
+      <i class="fa fa-upload" aria-hidden="true"></i>
+      &nbsp; Choose your image
+    </label>
+  </div>
+<!-- </div> -->
+  <hr>
+  <!-- <span *ngIf="uploader.queue[0]?.isSuccess">success</span> -->
+  <!-- <span *ngIf="uploader.queue[0]?.isError">Error</span> -->
+  <button type="button" class="btn btn-main btn-xs"
+          (click)="uploader.queue[0]?.upload()"
+          [disabled]="uploader.queue[0]?.isReady || uploader.queue[0]?.isUploading || uploader.queue[0]?.isSuccess">
+       Save
+  </button>
+
+  <!-- <div *ngIf="uploader.queue[0]?.isUploading || uploader.queue[0]?.isSuccess || uploader.queue[0]?.isError">
+    Queue progress:
+    <div class="progress" style="">
+      <div class="progress-bar" role="progressbar"
+           [ngStyle]="{ 'width': uploader.progress + '%' }"
+           [ngClass]="{'bg-primary': uploader.queue[0]?.isUploading, 'bg-success': uploader.queue[0]?.isSuccess, 'bg-danger': uploader.queue[0]?.isError }">
+      </div>
+    </div>
+  </div> -->
+</div>

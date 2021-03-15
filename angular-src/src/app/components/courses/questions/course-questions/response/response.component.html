@@ -1,0 +1,77 @@
+<div class="response">
+
+<div *ngIf="!editMode" [ngClass]="{'top_response': response._id === top_response_id}" class="response_padding">
+
+  <div class="dropdown">
+    <a class="dropdown-toggle pull-right" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <i class="fa fa-ellipsis-v question-options" aria-hidden="true"></i>
+    </a>
+    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+      <div *ngIf="authService.isOwner(response.user._id); else reportButton">
+      <a class="dropdown-item" (click)="editMode = true">Edit Response</a>
+      <a class="dropdown-item" (click)="onToDeleteResponse()">Delete Response</a>
+      </div>
+      <ng-template #reportButton>
+          <a class="dropdown-item" data-toggle="modal" data-target=".bd-report-modal" (click)="OnToReport()">Report</a>
+      </ng-template>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-1">
+      <img  [src]="response.user?.avatar_path" alt="User's avatar"
+           style="border-radius: 30px">
+    </div>
+    <div class="col-10 align-self-center">
+      <span style="padding-left:30px">{{response.user?.username}}</span>
+      <span *ngIf="response._id === top_response_id">
+        &nbsp; <i class="fa fa-trophy" aria-hidden="true"></i>
+        Answer
+      </span>
+    </div>
+  </div>
+  <br/>
+  <div [innerHTML]="response.body"></div>
+
+  <small>
+    <i>{{response.created_at | date: 'mediumDate' }}</i>
+    <span *ngIf="response.updated_at">&nbsp;&nbsp;|&nbsp;&nbsp;
+      <i>Last updated on: {{response.updated_at | date: 'mediumDate' }}</i>
+    </span>
+  </small>
+  <br/>
+  <br/>
+
+  <span class="useful-response" (click)="OnMarkResponseAsUseful()">
+    <span *ngIf="!selectedAsUsefulResponseByUser">
+      Mark as helpful
+    </span>
+    <span *ngIf="selectedAsUsefulResponseByUser">
+      <strong>
+        Marked as helpful
+      </strong>
+    </span>
+    <strong *ngIf="response.voters_count > 0">({{ response.voters_count }})</strong>
+  </span>
+
+  <span class="useful-response" (click)="OnMarkAsTopResponse()">
+    <span *ngIf="response._id != top_response_id">
+      Mark as top answer
+    </span>
+    <span *ngIf="response._id === top_response_id">
+      Unmark as top answer
+    </span>
+  </span>
+
+</div>
+
+<div *ngIf="editMode" class="response_padding">
+  <div class="form-group">
+    <app-tinymce [(ngModel)]='response.body'></app-tinymce>
+  </div>
+  <button class="btn btn-main btn-sm" (click)="onEditResponse()">Edit</button>
+  <button class="btn btn-accent-2 btn-sm float-right" (click)="editMode = false">Cancel</button>
+</div>
+</div>
+
+<!-- TODO : when response is deleted the total number of responses in the questions list is not updated -->

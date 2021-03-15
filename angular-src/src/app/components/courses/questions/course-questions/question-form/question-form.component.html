@@ -1,0 +1,17 @@
+<div class="container">
+  <div class="list-group-item question-form">
+    <form (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="title">Question Title</label>
+        <input type="text" id="title" [formControl]="questionTitle" class="form-control" required #f>
+      </div>
+      <div class="form-group">
+        <label for="body">Description</label>
+        <app-tinymce [formControl]='questionBody' id="body"></app-tinymce>
+      </div>
+      <button class="btn btn-main" type="submit" [disabled]="!f.value">{{ editedQuestion? 'Edit': 'Submit'}}</button>
+      <button class="btn btn-accent-2 float-right" type="button" [routerLink]="['../']" *ngIf="!editedQuestion">Back</button>
+      <button class="btn btn-accent-2 float-right" type="button" (click)="cancelEdit()" *ngIf="editedQuestion">Cancel</button>
+    </form>
+  </div>
+</div>

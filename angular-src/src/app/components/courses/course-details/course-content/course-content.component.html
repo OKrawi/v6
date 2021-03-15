@@ -1,0 +1,47 @@
+<div class="container">
+  <div id="accordion" role="tablist" aria-multiselectable="true">
+    <div *ngFor="let chapter of course.chapters; let i = index" class="chapter">
+      <div class="card">
+        <div class="card-header" role="tab" id="header_{{chapter._id}}" data-toggle="collapse"
+             attr.href="#tablist_{{chapter._id}}" attr.aria-controls="tablist_{{i}}" style="cursor: pointer">
+          <a aria-expanded="false">
+            <small>Chapter {{i+1}}</small>
+            <h5 class="mb-0">
+              {{chapter.title}}
+            </h5>
+          </a>
+        </div>
+      </div>
+      <div id="tablist_{{chapter._id}}" class="collapse lectures" role="tabpanel" attr.aria-labelledby="header_{{chapter._id}}" >
+        <div class="card-block">
+          <div *ngFor="let lecture of chapter.lectures; let i2 = index">
+            <div [ngClass]="{'currentLecture': coursesService.user_course_data.last_lecture_id === lecture._id}"
+                 openSelectedChapter (click)="onToLecture(lecture._id)"
+                 class="lecture"
+                 [currentLecture]="coursesService.user_course_data.last_lecture_id === lecture._id">
+              <div class="row align-items-center">
+                <div class="col-6">
+                  <span>{{cumulativeLength(i) + i2 + 1}}.&nbsp;</span>
+                  <a>
+                    {{ lecture.title }}
+                  </a>
+                </div>
+                <div class="col-4">
+                  {{ lecture.videoDuration }}
+                </div>
+                <div class="col-2">
+                  <div class="float-right">
+                    <label style="cursor:pointer">
+                      <input type="checkbox" class="checkbox" name="watched"
+                      [checked]="coursesService.user_course_data.watched_lectures_ids.indexOf(lecture._id) > -1"/>
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

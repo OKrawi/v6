@@ -1,0 +1,11 @@
+
+
+@media (max-width: 768px) {
+  img {
+    margin-top: 32px;
+  }
+}
+
+.container-fluid {
+  padding: 20px 36px;
+}

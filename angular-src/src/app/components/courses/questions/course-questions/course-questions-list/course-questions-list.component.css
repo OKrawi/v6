@@ -1,0 +1,70 @@
+.course-questions-list {
+  margin-top: 32px;
+}
+
+.list-group-item {
+  min-width: 410px;
+}
+
+.list-group-item:hover{
+  -webkit-box-shadow: 4px 1px 8px 0px rgba(197,197,197,0.5), -4px 1px 8px 0px rgba(197,197,197,0.5);
+     -moz-box-shadow: 4px 1px 8px 0px rgba(197,197,197,0.5), -4px 1px 8px 0px rgba(197,197,197,0.5);
+          box-shadow: 4px 1px 8px 0px rgba(197,197,197,0.5), -4px 1px 8px 0px rgba(197,197,197,0.5);
+}
+
+.crop {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.controls {
+  margin-bottom: 20px;
+}
+
+.btn {
+  margin: 20px;
+}
+
+.temp {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex-wrap: wrap;
+  flex: 1;
+  min-width: 1px;
+}
+
+.temp::after {
+  clear: both;
+  content: " ";
+  display: table;
+}
+
+.temp::before {
+  content: " ";
+  display: table;
+}
+
+.search-quaestions-bar {
+  margin-top: 15px;
+  flex: 1;
+  min-width: 1px;
+}
+
+.new-questions-button {
+  position: relative;
+}
+
+.checkbox {
+  margin-left: -1.5em;
+  position: absolute;
+}
+
+.form-check-label span {
+  padding-left: .35em;
+}
+
+.questions-cards{
+  min-height: 300px;
+}

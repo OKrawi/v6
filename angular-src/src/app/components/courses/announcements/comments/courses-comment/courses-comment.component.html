@@ -1,0 +1,35 @@
+<div *ngIf="!editMode">
+  <div class="dropdown">
+    <a class="dropdown-toggle pull-right" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <i class="fa fa-ellipsis-v question-options" aria-hidden="true"></i>
+    </a>
+    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+      <div *ngIf="authService.isOwner(comment.user?._id); else reportButton">
+        <a class="dropdown-item" (click)="editMode = true">Edit Response</a>
+        <a class="dropdown-item" (click)="onToDeleteComment()">Delete Comment</a>
+      </div>
+      <ng-template #reportButton>
+        <a class="dropdown-item" data-toggle="modal" data-target=".bd-report-modal" (click)="OnToReport()">Report</a>
+      </ng-template>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-2 col-md-1">
+      <img [src]="comment.user?.avatar_path" alt="user's avatar" style="border-radius: 30px">
+    </div>
+    <div class="col-10 align-self-center">
+      <h6>{{comment.user?.username}}</h6>
+    </div>
+  </div>
+  <br/>
+  <p>{{comment.body}}</p>
+</div>
+
+<div *ngIf="editMode">
+  <div class="form-group">
+    <input type="text" class="form-control" [(ngModel)]="comment.body"
+           placeholder="Edit your comment">
+  </div>
+  <button class="btn btn-main btn-sm" (click)="onEditComment()">Edit</button>
+  <button class="btn btn-accent-2 btn-sm" (click)="editMode = false">Cancel</button>
+</div>

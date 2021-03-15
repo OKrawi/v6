@@ -1,0 +1,19 @@
+<div class="container">
+  <div class="list-group-item">
+    <form (submit)="onLoginSubmit()">
+      <div class="form-group">
+        <label>Email</label>
+        <input type="text" class="form-control" [(ngModel)]="email" name="email">
+      </div>
+      <div class="form-group">
+        <label>Password</label>
+        <input type="password" class="form-control" [(ngModel)]="password" name="password">
+      </div>
+      <div class="text-center">
+        <button type="submit" class="btn btn-main">
+          Login
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

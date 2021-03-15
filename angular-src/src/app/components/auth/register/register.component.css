@@ -1,0 +1,9 @@
+.container {
+  margin-top: 32px;
+}
+
+.list-group-item{
+  -webkit-box-shadow: 1px 1px 4px -1px rgba(34,34,34,0.5);
+     -moz-box-shadow: 1px 1px 4px -1px rgba(34,34,34,0.5);
+          box-shadow: 1px 1px 4px -1px rgba(34,34,34,0.5);
+}

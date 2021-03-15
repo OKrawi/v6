@@ -1,0 +1,42 @@
+<div class="container">
+    <div class="row">
+        <div class="col">
+
+          <h3>Select Image</h3>
+
+          <div ng2FileDrop
+               [ngClass]="{'nv-file-over': hasBaseDropZoneOver}"
+               (fileOver)="fileOverBase($event)"
+               [uploader]="uploader"
+               class="well my-drop-zone text-center">
+              Drop Image Here
+          </div>
+
+          <input type="file" name="file" id="file" ng2FileSelect [uploader]="uploader" class="inputfile" />
+          <label for="file" class="btn btn-success"><i class="fa fa-upload" aria-hidden="true"></i>&nbsp; Choose your image</label>
+
+          <div class="clearfix">
+            <img *ngIf="uploader.queue[0]?._file" src="" imgPreview [image]="uploader.queue[0]?._file" class="img-preview img-fluid" />
+            <p>{{ uploader.queue[0]?.file?.name }}</p>
+          </div>
+
+          <span *ngIf="uploader.queue[0]?.isSuccess">success</span>
+          <span *ngIf="uploader.queue[0]?.isError">Error</span>
+          <button type="button" class="btn btn-success btn-xs"
+                  (click)="uploader.queue[0]?.upload()"
+                  [disabled]="uploader.queue[0]?.isReady || uploader.queue[0]?.isUploading || uploader.queue[0]?.isSuccess">
+               Upload
+          </button>
+
+          <div *ngIf="uploader.queue[0]?.isUploading || uploader.queue[0]?.isSuccess || uploader.queue[0]?.isError">
+              Queue progress:
+              <div class="progress" style="">
+                  <div class="progress-bar" role="progressbar"
+                       [ngStyle]="{ 'width': uploader.progress + '%' }"
+                       [ngClass]="{'bg-primary': uploader.queue[0]?.isUploading, 'bg-success': uploader.queue[0]?.isSuccess, 'bg-danger': uploader.queue[0]?.isError }"></div>
+              </div>
+          </div>
+
+        </div>
+    </div>
+</div>
